@@ -8,6 +8,6 @@ RUN npm install
 
 EXPOSE 8080
 ENV PORT=8080
-ENV DB=localhost
+ENV DB=postgres://api_user:apipassword@localhost/node-3tier-api
 
-#ENTRYPOINT ["npm", "start"]
+ENTRYPOINT ["npm", "start"]

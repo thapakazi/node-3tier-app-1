@@ -1,29 +1,29 @@
-version: 3
+version: '3'
 services:
 
   api:
-    build: ./api/Dockerfile
+    build: ./api
     ports:
       - "8080:8080"
     environment:
       PORT: 8080
-      DB: 'postgress://api_user:mysecretpassword@db-internal.camharris.me'
+      DB: 'postgress://api_user:mysecretpassword@db-internal.camharris.me/api'
     networks:
       mynetwork:
         aliases:
-          api-app.camharris.me
+          - api-app.camharris.me
   
   web:
-    build: ./web/Dockerfile
+    build: ./web
     ports:
       - "80:80"
     environment:
       PORT: 80
-      API_HOST: api-app.camharris.me
+      API_HOST: http://api-app.camharris.me:8080
     networks:
       mynetwork:
         aliases:
-          web-app.camharris.me
+          - web-app.camharris.me
 
   db:
     image: postgres
@@ -36,5 +36,9 @@ services:
     networks:
       mynetwork:
         aliases:
-          db-internal.camharris.me
+          - db-internal.camharris.me
+
+networks:
+  mynetwork:
+    driver: bridge
   
