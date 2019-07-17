@@ -4,3 +4,68 @@ environments:
     provider: ecs-fargate
   - name: production
     provider: ecs-fargate
+
+service:
+- name: api
+  desiredCount: 4
+  dockerfile: ./api/Dockerfile
+  port: 8080
+  protocol: HTTP
+  healthEndpoint: /api/status
+  cpu: 20
+  memory: 400
+  networkMode: awsvpc
+  minSize: 1
+  maxSize: 4
+  deploymentStrategy: blue_green
+
+  pathPatterns:
+    - /api
+
+  # This creates the target group for the alb
+  hostPatterns:
+    - api.*
+
+  environment:
+    PORT: 8080
+    DB_URL: postgres://${DatabaseMasterUsername}:${DatabaseMasterPassword}@${DatabaseEndpointAddress}/api
+      #acceptance: postgres://${DatabaseMasterUsername}:${DatabaseMasterPassword}@${DatabaseEndpointAddress}/api
+      #production: 'postgres://api_user:mysecretpassword@db-internal.camharris.me/api'
+
+  # Create database resources for this serivce
+  database:
+      name: api
+
+      engine: postgres
+      instanceClass: db.t2.micro
+      masterUsername: api_user
+      allocatedStorage: 20
+      minSize: 2
+      maxSize: 4
+
+# Web Service
+- name: web
+  desiredCount: 4
+  dockerfile: ./web/Dockerfile
+  port: 80
+  protocol: HTTP
+  healthEndpoint: /
+  cpu: 20
+  memory: 400
+  networkMode: awsvpc
+  minSize: 1
+  maxSize: 4
+  deploymentStrategy: blue_green
+
+  pathPatterns:
+    - /
+
+  # This creates the target group for the alb
+  hostPatterns:
+    - web.*
+
+  environment:
+    PORT: 80
+    API_HOST: http://api.local:8080
+  
+

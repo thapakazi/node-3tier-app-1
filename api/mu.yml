@@ -1,0 +1,39 @@
+---
+service:
+  name: api
+  desiredCount: 4
+  dockerfile: ./Dockerfile
+  port: 8080
+  protocol: HTTP
+  healthEndpoint: /api/status
+  cpu: 20
+  memory: 400
+  networkMode: awsvpc
+  minSize: 1
+  maxSize: 4
+  deploymentStrategy: blue_green
+
+  pathPatterns:
+    - /api
+
+  # This creates the target group for the alb
+  hostPatterns:
+    - api.*
+
+  environment:
+    PORT: 8080
+    DB_URL: postgres://api_user:mysecretpassword@bbwsexflix.com/api
+    #DB_URL: postgres://${DatabaseMasterUsername}:${DatabaseMasterPassword}@${DatabaseEndpointAddress}/api
+      #acceptance: postgress://${DatabaseMasterUsername}:${DatabaseMasterPassword}@${DatabaseEndpointAddress}/api
+      #production: 'postgress://api_user:mysecretpassword@db-internal.camharris.me/api'
+
+  # Create database resources for this serivce
+  database:
+      name: api
+
+      engine: postgres
+      instanceClass: db.t2.medium
+      masterUsername: api_user
+      allocatedStorage: 20
+      minSize: 2
+      maxSize: 4

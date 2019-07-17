@@ -7,7 +7,7 @@ services:
       - "8080:8080"
     environment:
       PORT: 8080
-      DB: 'postgress://api_user:mysecretpassword@db-internal.camharris.me/api'
+      DB: 'postgres://api_user:mysecretpassword@db-internal.camharris.me/api'
     networks:
       mynetwork:
         aliases:
