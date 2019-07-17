@@ -11,7 +11,7 @@ RUN npm install
 
 EXPOSE 80
 ENV PORT=80
-ENV API_HOST=db-internal.camharris.me
+ENV API_HOST=api.local
 
 
 ENTRYPOINT ["npm", "start"]
