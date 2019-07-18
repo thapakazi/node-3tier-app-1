@@ -22,10 +22,7 @@ service:
 
   environment:
     PORT: 8080
-    DB_URL: postgres://api_user:mysecretpassword@bbwsexflix.com/api
-    #DB_URL: postgres://${DatabaseMasterUsername}:${DatabaseMasterPassword}@${DatabaseEndpointAddress}/api
-      #acceptance: postgress://${DatabaseMasterUsername}:${DatabaseMasterPassword}@${DatabaseEndpointAddress}/api
-      #production: 'postgress://api_user:mysecretpassword@db-internal.camharris.me/api'
+    DB: postgres://${DatabaseMasterUsername}:${DatabaseMasterPassword}@${DatabaseEndpointAddress}/api
 
   # Create database resources for this serivce
   database:
@@ -37,3 +34,29 @@ service:
       allocatedStorage: 20
       minSize: 2
       maxSize: 4
+
+#templates:
+#  mu-database-api-acceptance:
+#    Resources:
+#      DBInstanceClustered:
+#        Properties:
+#          PubliclyAccessible: true
+#      DBInstanceStandalone:
+#        Properties:
+#          PubliclyAccessible: true
+  
+  #mu-service-api-acceptance:
+  #  Resources:
+  #    EcsService:
+  #      Properties:
+  #        NetworkConfiguration:
+  #          AwsvpcConfiguration:
+  #            AssignPublicIp: ENABLED
+
+    #parameters:
+    #  'mu-service-api-acceptance':
+    #    run_params:
+    #      network_configuration:
+    #        awsvpc_configuration:
+    #          assign_public_ip: ENABLED
+

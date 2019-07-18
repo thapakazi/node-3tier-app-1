@@ -1,0 +1,27 @@
+---
+service:
+  name: web
+  desiredCount: 4
+  dockerfile: ./Dockerfile
+  port: 80
+  protocol: HTTP
+  healthEndpoint: /
+  cpu: 20
+  memory: 400
+  networkMode: awsvpc
+  minSize: 1
+  maxSize: 4
+  deploymentStrategy: blue_green
+
+  pathPatterns:
+    - /
+
+  # This creates the target group for the alb
+  hostPatterns:
+    - web.*
+
+  environment:
+    PORT: 80
+    API_HOST:
+      acceptance: http://api.acceptance.mu.local:8080
+      production: http://api.production.mu.local:8080
