@@ -16,7 +16,7 @@ aws configure
 mu env up -A
 ```
 
-## Build API tier in AWS for our acceptance environment
+## Build API and Database tier in AWS for our acceptance environment
 ```
 cd api
 # Create Database tier
@@ -62,11 +62,26 @@ acceptance environment to the production environment. The approval process can b
 CodeBuild dashboard. 
 
 
-## Create Web service and deploy web task
+## Create the Web tier
 Follow the same steps for the web service
 ```
 cd web
 mu service push acceptance
 mu service deploy acceptance
 mu pipeline up
+cd ../
 ```
+This creates the web container, web task and web service as well as the pipeline for building the web container in the AWS acceptance environment. It's necessary to create the web tier after the api and database tier because the health of th web container relys on recieving a response from the api service. 
+
+## Create Cloudfront distribution to act as our CDN for both environments
+```
+# in the root of the project directory
+ACCEPTANCE_DNS=$(mu env show acceptance | grep 'Base URL'| cut -f3 -d'/')
+aws cloudfront create-distribution --origin-domain-name $ACCEPTANCE_DNS | jq '.Distribution["DomainName"]'
+PROD_DNS=$(mu env show acceptance | grep 'Base URL' | cut -f3 -d'/')
+aws cloudfront create-distribution --origin-domain-name $ACCEPTANCE_DNS | jq '.Distribution["DomainName"]'
+```
+This step grabs the application load balancer url for each environment (acceptance/production) and then creates a CloudFront distribution that spans across all regions.
+
+
+
