@@ -23,5 +23,5 @@ service:
   environment:
     PORT: 80
     API_HOST:
-      acceptance: http://api.acceptance.mu.local:8080
-      production: http://api.production.mu.local:8080
+      acceptance: http://api.acceptance.node-3tier-app.local:8080 #domain should be replaced with whatever namespace you launch in (default: mu)
+      production: http://api.production.node-3tier-app.local:8080

@@ -14,7 +14,7 @@ service:
   deploymentStrategy: blue_green
 
   pathPatterns:
-    - /api
+    - /api/*
 
   # This creates the target group for the alb
   hostPatterns:
@@ -35,28 +35,4 @@ service:
       minSize: 2
       maxSize: 4
 
-#templates:
-#  mu-database-api-acceptance:
-#    Resources:
-#      DBInstanceClustered:
-#        Properties:
-#          PubliclyAccessible: true
-#      DBInstanceStandalone:
-#        Properties:
-#          PubliclyAccessible: true
-  
-  #mu-service-api-acceptance:
-  #  Resources:
-  #    EcsService:
-  #      Properties:
-  #        NetworkConfiguration:
-  #          AwsvpcConfiguration:
-  #            AssignPublicIp: ENABLED
-
-    #parameters:
-    #  'mu-service-api-acceptance':
-    #    run_params:
-    #      network_configuration:
-    #        awsvpc_configuration:
-    #          assign_public_ip: ENABLED
 

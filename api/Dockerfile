@@ -14,3 +14,4 @@ HEALTHCHECK --interval=10s --timeout=3s \
     CMD curl -f -s http://localhost:8080/api/status
 
 ENTRYPOINT ["npm", "start"]
+
