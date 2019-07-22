@@ -76,7 +76,7 @@ This creates the web container, web task and web service as well as the pipeline
 
 ## Create Cloudfront distribution to act as our CDN for both environments
 ```
-# in the root of the project directory
+# in the root of this project directory
 ACCEPTANCE_DNS=$(mu env show acceptance | grep 'Base URL'| cut -f3 -d'/')
 aws cloudfront create-distribution --origin-domain-name $ACCEPTANCE_DNS | jq '.Distribution["DomainName"]'
 PROD_DNS=$(mu env show acceptance | grep 'Base URL' | cut -f3 -d'/')
