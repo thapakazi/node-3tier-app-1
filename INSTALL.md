@@ -13,17 +13,17 @@ aws configure
 
 ## Build VPC, ECS Cluster, and ALB for both production and acceptance environments
 ```
-mu env up -A
+mu -n node-3tier-app env up -A
 ```
 
 ## Build API and Database tier in AWS for our acceptance environment
 ```
 cd api
 # Create Database tier
-mu db up <environment>
+mu -n node-3tier-app db up <environment>
 # create ecr image and api service with task
-mu service push <environment>
-mu service deploy <environment> 
+mu -n node-3tier-app service push <environment>
+mu -n node-3tier-app service deploy <environment> 
 ```
 This step creates a database for for the API service, then
 builds the api docker image and pushes it to a newly created ECR repository.
@@ -35,9 +35,9 @@ container image that was pushed to ECR.
 ```
 # from inside the api/ directory
 # initalize the pipeline, will take about 10min
-mu pipeline up
+mu -n node-3tier-app pipeline up
 # See the pipeline that mu created
-mu svc show 
+mu -n node-3tier-app svc show 
 Pipeline URL:   https://console.aws.amazon.com/codesuite/codepipeline/pipelines/mu-web/view?region=us-west-2
 +------------+----------+------------------------------------------+-------------+---------------------+
 |   STAGE    |  ACTION  |                 REVISION                 |   STATUS    |     LAST UPDATE     |
@@ -63,15 +63,16 @@ CodeBuild dashboard.
 
 
 ## Create the Web tier
-Follow the same steps for the web service
+Follow the same steps for the web service after checking out the web repo into the parent directory of this repo.
 ```
-cd web
-mu service push acceptance
-mu service deploy acceptance
-mu pipeline up
 cd ../
+git clone git@github.com:camharris/node-3tier-app-web.git
+cd node-3tier-app-web/
+mu -n node-3tier-app service push acceptance
+mu -n node-3tier-app service deploy acceptance
+mu -n node-3tier-app pipeline up
 ```
-This creates the web container, web task and web service as well as the pipeline for building the web container in the AWS acceptance environment. It's necessary to create the web tier after the api and database tier because the health of th web container relys on recieving a response from the api service. 
+This creates the web container, web task and web service as well as the pipeline for building the web container in the AWS acceptance environment. It's necessary to create the web tier after the api and database tier because the health of the web container relys on recieving a response from the api service.
 
 ## Create Cloudfront distribution to act as our CDN for both environments
 ```

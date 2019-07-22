@@ -1,3 +1,5 @@
+# This app has been moved to a seperate repo [HERE](https://github.com/camharris/node-3tier-app-we)
+
 # Devops Web App
 
 

@@ -14,7 +14,7 @@ services:
           - api-app.camharris.me
   
   web:
-    build: ./web
+    build: ../node-3tier-app-web
     ports:
       - "80:80"
     environment:

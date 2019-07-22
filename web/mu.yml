@@ -14,7 +14,7 @@ service:
   deploymentStrategy: blue_green
 
   pathPatterns:
-    - /
+    - /*
 
   # This creates the target group for the alb
   hostPatterns:
