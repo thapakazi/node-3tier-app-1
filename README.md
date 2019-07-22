@@ -10,7 +10,7 @@ web <=> api <=> db
 The folders `web` and `api` respectively describe how to install and run each app.
 
 ## Bringing up the development environment
-The development environment for this application can be brought up with docker compose. In order run this environment it's necessary to checkout [web app](https://github.com/camharris/node-3tier-app-we) in the parent directory of this repo.
+The development environment for this application can be brought up with docker compose. In order run this environment it's necessary to checkout [web app](https://github.com/camharris/node-3tier-app-we) into the parent directory of this repo.
 ```
 $ pwd
 /home/cam/projects/toptal
@@ -30,12 +30,14 @@ docker-compose up
 
 
 ## Infrastructure and CI/CD pipeline 
-For more information on building th infrastructure and CI/CD project view the [Infrastucture installation](INSTALL.md)
+For more information on building the infrastructure and CI/CD pipeline view the [Infrastucture installation](INSTALL.md)
 
-## Presentation outlining architectural
+## Presentation outlining architecture
 [Google Presentation](https://docs.google.com/presentation/d/18GmstDgqSejoV_8-sTRUeDI48ayv_wuw01Vg8FAetW0/edit?usp=sharing)
 
-## Links to my relavent github repos:
-The web tier has been seperated from the api/database tier
+## Links to my relevant github repos:
+This project was seperated into two seperate repositories and moved to github:
+
 [Primary repo including api/db tier](https://github.com/camharris/node-3tier-app)
+
 [web tier](https://github.com/camharris/node-3tier-app-we)
