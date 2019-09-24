@@ -40,4 +40,4 @@ This project was seperated into two seperate repositories and moved to github:
 
 [Primary repo including api/db tier](https://github.com/camharris/node-3tier-app)
 
-[web tier](https://github.com/camharris/node-3tier-app-we)
+[web tier](https://github.com/camharris/node-3tier-app-web)
