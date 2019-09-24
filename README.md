@@ -10,7 +10,7 @@ web <=> api <=> db
 The folders `web` and `api` respectively describe how to install and run each app.
 
 ## Bringing up the development environment
-The development environment for this application can be brought up with docker compose. In order run this environment it's necessary to checkout [web app](https://github.com/camharris/node-3tier-app-we) into the parent directory of this repo.
+The development environment for this application can be brought up with docker compose. In order run this environment it's necessary to checkout [web app](https://github.com/camharris/node-3tier-app-web) into the parent directory of this repo.
 ```
 $ pwd
 /home/cam/projects/toptal
