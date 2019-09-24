@@ -30,7 +30,7 @@ docker-compose up
 
 
 ## Infrastructure and CI/CD pipeline 
-For more information on building the infrastructure and CI/CD pipeline view the [Infrastucture installation](INSTALL.md)
+For more information on building the infrastructure and CI/CD pipeline view the [Infrastructure installation](INSTALL.md)
 
 ## Presentation outlining architecture
 [Google Presentation](https://docs.google.com/presentation/d/18GmstDgqSejoV_8-sTRUeDI48ayv_wuw01Vg8FAetW0/edit?usp=sharing)
